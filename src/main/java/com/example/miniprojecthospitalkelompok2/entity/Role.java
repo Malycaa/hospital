@@ -4,7 +4,8 @@ import com.example.miniprojecthospitalkelompok2.common.USER_ENUM;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -20,7 +21,5 @@ public class Role {
     private USER_ENUM name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "role")
-    private Set<Users> users;
-
-
+    private List<Users> users;
 }
