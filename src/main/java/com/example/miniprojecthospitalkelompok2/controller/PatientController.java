@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.miniprojecthospitalkelompok2.entity.Patients;
 import com.example.miniprojecthospitalkelompok2.entity.Users;
 import com.example.miniprojecthospitalkelompok2.payload.request.IgnoreRequest;
-import com.example.miniprojecthospitalkelompok2.payload.request.InquiryName;
+import com.example.miniprojecthospitalkelompok2.payload.request.PatientInquiry;
 import com.example.miniprojecthospitalkelompok2.payload.response.CommonResponse;
 import com.example.miniprojecthospitalkelompok2.repository.PatientRepository;
 import com.example.miniprojecthospitalkelompok2.repository.UserRepository;
@@ -31,7 +31,6 @@ public class PatientController {
     UserRepository userRepository;
 
     @PostMapping("/addPatient")
-    // @Operation(summary = "addPatient", security = @SecurityRequirement(name = "Authorization"))
     public ResponseEntity<?> addPatient(@Valid @RequestBody IgnoreRequest.AddPatient request) {
         try {
             Users user = userRepository.findById(request.getUser_id()).orElse(null);
@@ -43,7 +42,6 @@ public class PatientController {
     }
 
     @PutMapping("/editPatient")
-    // @Operation(summary = "editPatient", security = @SecurityRequirement(name = "Authorization"))
     public ResponseEntity<?> editPatient(@Valid @RequestBody IgnoreRequest.EditPatient request) {
         try {
             Users user = userRepository.findById(request.getUser_id()).orElse(null);
@@ -56,10 +54,9 @@ public class PatientController {
 
 
     @PostMapping("/inquiryPatient")
-    // @Operation(summary = "inquiryPatient", security = @SecurityRequirement(name = "Authorization"))
-    public ResponseEntity<?> inquiryPatient(@RequestBody InquiryName request) {
+    public ResponseEntity<?> inquiryPatient(@RequestBody PatientInquiry request) {
         try {
-            List<Patients> lists = patientService.inquiryPatient(request.getValue());
+            List<Patients> lists = patientService.inquiryPatient(request);
             return CommonResponse.common("OK", HttpStatus.OK, lists);
         } catch (Exception e) {
             return CommonResponse.fail(e.getMessage());
@@ -68,7 +65,6 @@ public class PatientController {
 
 
     @DeleteMapping("/deletePatientById/{patient_id}")
-    // @Operation(summary = "deletePatientById", security = @SecurityRequirement(name = "Authorization"))
     public ResponseEntity<Object> deletePatientById(@PathVariable Long patient_id) {
         try {
             patientRepository.deleteById(patient_id);

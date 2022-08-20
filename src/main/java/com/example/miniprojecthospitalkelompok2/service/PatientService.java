@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.miniprojecthospitalkelompok2.entity.Patients;
+import com.example.miniprojecthospitalkelompok2.payload.request.PatientInquiry;
 import com.example.miniprojecthospitalkelompok2.repository.PatientRepository;
 
 @Service
@@ -13,7 +14,7 @@ public class PatientService {
     @Autowired
     PatientRepository repository;
 
-    public List<Patients> inquiryPatient(String param){
+    public List<Patients> inquiryPatient(PatientInquiry param){
         return repository.inquiryPatient(param);
     }
 }

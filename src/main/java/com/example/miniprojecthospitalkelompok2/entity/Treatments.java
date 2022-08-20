@@ -25,7 +25,13 @@ public class Treatments {
 
     private Instant createTime;
 
-    @OneToMany(targetEntity = Medication.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "treatments_id", referencedColumnName = "treatment_id")
-    private List<Medication> medications;
+    // @OneToMany(targetEntity = Medication.class, cascade = CascadeType.ALL)
+    // @JoinColumn(name = "treatments_id", referencedColumnName = "treatment_id")
+    // private List<Medication> medications;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "medication_list", 
+    joinColumns = @JoinColumn(name = "treatment_id"), 
+    inverseJoinColumns = @JoinColumn(name = "medication_id"))
+	private List<Medication> medications;
 }

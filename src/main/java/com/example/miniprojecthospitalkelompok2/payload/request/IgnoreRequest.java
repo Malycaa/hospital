@@ -1,5 +1,6 @@
 package com.example.miniprojecthospitalkelompok2.payload.request;
 
+import com.example.miniprojecthospitalkelompok2.entity.Medication;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class IgnoreRequest {
@@ -14,4 +15,18 @@ public class IgnoreRequest {
     public static class AddPatient extends PatientRequest {}
 
     public static class EditPatient extends PatientRequest {}
+
+    @JsonIgnoreProperties({"medication_id"})
+    public static class AddMedication extends MedicationRequest {}
+
+    public static class EditMedication extends MedicationRequest {}
+
+    @JsonIgnoreProperties({"medication_name", "medication_dose"})
+    public static class MedicationTreatment extends Medication {}
+
+
+    @JsonIgnoreProperties({"treatment_id"})
+    public static class AddTreatment extends TreatmentRequest {}
+    
+    public static class EditTreatment extends TreatmentRequest {}
 }

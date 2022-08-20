@@ -1,8 +1,16 @@
 package com.example.miniprojecthospitalkelompok2.utils;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.miniprojecthospitalkelompok2.entity.Medication;
 import com.example.miniprojecthospitalkelompok2.entity.Patients;
+import com.example.miniprojecthospitalkelompok2.entity.Treatments;
 import com.example.miniprojecthospitalkelompok2.entity.Users;
 import com.example.miniprojecthospitalkelompok2.payload.request.AdminRequest;
+import com.example.miniprojecthospitalkelompok2.payload.request.MedicationRequest;
 import com.example.miniprojecthospitalkelompok2.payload.request.PatientRequest;
+import com.example.miniprojecthospitalkelompok2.payload.request.TreatmentRequest;
 
 public class Consts {
     public static Users toUser(AdminRequest request) {
@@ -37,6 +45,39 @@ public class Consts {
         model.setComplaints(req.getComplaints());
         model.setRegistrationDate(req.getRegistrationDate());
         model.setUsers(user);
+        return model;
+    }
+
+
+    public static Treatments toTreatment(TreatmentRequest req) {
+        List<Medication> list = new ArrayList<Medication>();
+        Treatments model = new Treatments();
+        if (req.getTreatment_id() != null) {
+            model.setTreatment_id(req.getTreatment_id());
+        }
+
+        req.getMedications().forEach((i)->{
+            Medication newModel = new Medication();
+            newModel.setMedication_id(i.getMedication_id());
+            list.add(newModel);
+        });
+
+        model.setSickness(req.getSickness());
+        model.setSickness_desc(req.getSickness_desc());
+        model.setSickness_handling(req.getSickness_handling());
+        model.setCreateTime(Instant.now());
+        model.setMedications(list);
+        return model;
+    }
+
+    public static Medication toMedication(MedicationRequest req) {
+        Medication model = new Medication();
+        if (req.getMedication_id() != null) {
+            model.setMedication_id(req.getMedication_id());
+        }
+
+        model.setMedication_name(req.getMedication_name());
+        model.setMedication_dose(req.getMedication_dose());
         return model;
     }
 }
