@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -19,20 +19,26 @@ public class Patients implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patient_id;
-    private String name;
-    private String tempatLahir;
-    private String tanggalLahir;
-    private String address;
-    private String jenisKelamin;
-    private Date tanggalRegistrasi;
-    private String keluhan;
 
-    @OneToMany(targetEntity =Treatments.class, cascade = CascadeType.ALL)
+    private String patient_name;
+
+    private String birth_place;
+
+    private String birth_date;
+
+    private String address;
+
+    private String gender;
+
+    private String complaints;
+
+    private Instant registrationDate;
+
+    @OneToMany(targetEntity = Treatments.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "patients_id", referencedColumnName = "patient_id")
     private List<Treatments> treatments;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users users;
-
 }

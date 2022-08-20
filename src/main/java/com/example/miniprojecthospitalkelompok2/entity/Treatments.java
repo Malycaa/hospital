@@ -3,26 +3,29 @@ package com.example.miniprojecthospitalkelompok2.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "treatment_table")
-public class Treatments{
-
+public class Treatments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long treatment_id;
-    private String namaPenyakit;
-    private String penyakitDesc;
-    private String penanganan;
-    private String obat;
-    private String dosis;
-    private Date tanggalPembuatan;
 
+    private String sickness;
 
+    private String sickness_desc;
+
+    private String sickness_handling;
+
+    private Instant createTime;
+
+    @OneToMany(targetEntity = Medication.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "treatments_id", referencedColumnName = "treatment_id")
+    private List<Medication> medications;
 }

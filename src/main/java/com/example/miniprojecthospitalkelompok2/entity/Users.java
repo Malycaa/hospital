@@ -1,9 +1,9 @@
 package com.example.miniprojecthospitalkelompok2.entity;
-
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 
 
 @Entity
@@ -19,17 +19,20 @@ public class Users {
 
     private String username;
 
+    private String full_name;
+
     private String gender;
 
     private String email;
 
     private String address;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "role", joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
+    private String role;
 
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
+
+    private String age;
 
     public Users(String username, String email, String password) {
         this.username = username;
