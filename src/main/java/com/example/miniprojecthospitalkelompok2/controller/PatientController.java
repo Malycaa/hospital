@@ -73,4 +73,13 @@ public class PatientController {
             return CommonResponse.fail(e.getMessage());
         }
     }
+    @GetMapping("/getPatientById/{patient_id}")
+    public ResponseEntity<?> getPatientById(@PathVariable Long patient_id) {
+        try {
+            Patients patients = patientRepository.findById(patient_id).orElse(null);
+            return CommonResponse.common("OK", HttpStatus.OK, patients);
+        } catch (Exception e) {
+            return CommonResponse.fail(e.getMessage());
+        }
+    }
 }
