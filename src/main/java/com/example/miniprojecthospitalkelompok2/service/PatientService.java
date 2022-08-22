@@ -17,4 +17,8 @@ public class PatientService {
     public List<Patients> inquiryPatient(PatientInquiry param){
         return repository.inquiryPatient(param);
     }
+
+    public List<Patients> inquiryPatientByAdmin(String param){
+        return repository.inquiryPatientByAdmin(param);
+    }
 }

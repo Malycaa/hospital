@@ -11,9 +11,10 @@ public class IgnoreRequest {
     @JsonIgnoreProperties("role")
     public static class EditAdmin extends AdminRequest {}
 
-    @JsonIgnoreProperties("patient_id")
+    @JsonIgnoreProperties({"patient_id", "registrationDate"})
     public static class AddPatient extends PatientRequest {}
 
+    @JsonIgnoreProperties({"registrationDate"})
     public static class EditPatient extends PatientRequest {}
 
     @JsonIgnoreProperties({"medication_id"})

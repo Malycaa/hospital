@@ -43,7 +43,7 @@ public class Consts {
         model.setAddress(req.getAddress());
         model.setGender(req.getGender());
         model.setComplaints(req.getComplaints());
-        model.setRegistrationDate(req.getRegistrationDate());
+        model.setRegistrationDate(Instant.now());
         model.setUsers(user);
         return model;
     }

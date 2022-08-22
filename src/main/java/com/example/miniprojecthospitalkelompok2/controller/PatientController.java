@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.miniprojecthospitalkelompok2.entity.Patients;
 import com.example.miniprojecthospitalkelompok2.entity.Users;
 import com.example.miniprojecthospitalkelompok2.payload.request.IgnoreRequest;
+import com.example.miniprojecthospitalkelompok2.payload.request.InquiryName;
 import com.example.miniprojecthospitalkelompok2.payload.request.PatientInquiry;
 import com.example.miniprojecthospitalkelompok2.payload.response.CommonResponse;
 import com.example.miniprojecthospitalkelompok2.repository.PatientRepository;
@@ -57,6 +58,17 @@ public class PatientController {
     public ResponseEntity<?> inquiryPatient(@RequestBody PatientInquiry request) {
         try {
             List<Patients> lists = patientService.inquiryPatient(request);
+            return CommonResponse.common("OK", HttpStatus.OK, lists);
+        } catch (Exception e) {
+            return CommonResponse.fail(e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/inquiryPatientByAdmin")
+    public ResponseEntity<?> inquiryPatientByAdmin(@RequestBody InquiryName request) {
+        try {
+            List<Patients> lists = patientService.inquiryPatientByAdmin(request.getValue());
             return CommonResponse.common("OK", HttpStatus.OK, lists);
         } catch (Exception e) {
             return CommonResponse.fail(e.getMessage());

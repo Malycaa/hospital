@@ -3,7 +3,6 @@ package com.example.miniprojecthospitalkelompok2.payload.request;
 import java.time.Instant;
 import java.util.List;
 
-import com.example.miniprojecthospitalkelompok2.payload.request.IgnoreRequest.MedicationTreatment;
 
 import lombok.Data;
 

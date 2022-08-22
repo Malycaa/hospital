@@ -91,7 +91,8 @@ public class AdminController {
     public ResponseEntity<Object> updateUser(@RequestBody IgnoreRequest.EditAdmin req) {
         try {
             userRepository.save(Consts.toUser(req));
-            return CommonResponse.success("User Updated");
+            Users user = userRepository.findById(req.getUser_id()).orElse(null);
+            return CommonResponse.common("OK", HttpStatus.OK, user);
         } catch (Exception e) {
             return CommonResponse.fail(e.getMessage());
         }
