@@ -1,4 +1,5 @@
 package com.example.miniprojecthospitalkelompok2.utils;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,13 @@ import com.example.miniprojecthospitalkelompok2.payload.request.TreatmentRequest
 public class Consts {
     public static Users toUser(AdminRequest request) {
         Users model = new Users();
-        if (request.getRole() != null) {
+        if (request.getUser_id() != null) {
+            model.setUser_id(request.getUser_id());
+        }
+        if (request.getRole() != null && request.getRole() != "") {
             model.setRole(request.getRole());
         }
-        if (request.getPassword() != null) {
+        if (request.getPassword() != null && request.getPassword() != "") {
             model.setPassword(request.getPassword());
         }
         model.setFull_name(request.getFull_name());
@@ -48,7 +52,6 @@ public class Consts {
         return model;
     }
 
-
     public static Treatments toTreatment(TreatmentRequest req) {
         List<Medication> list = new ArrayList<Medication>();
         Treatments model = new Treatments();
@@ -56,7 +59,7 @@ public class Consts {
             model.setTreatment_id(req.getTreatment_id());
         }
 
-        req.getMedications().forEach((i)->{
+        req.getMedications().forEach((i) -> {
             Medication newModel = new Medication();
             newModel.setMedication_id(i.getMedication_id());
             list.add(newModel);

@@ -87,9 +87,35 @@ public class AdminController {
         }
     }
 
-    @PutMapping("/updateUser")
-    public ResponseEntity<Object> updateUser(@RequestBody IgnoreRequest.EditAdmin req) {
+    @PutMapping("/updateAdmin")
+    public ResponseEntity<Object> updateAdmin(@RequestBody IgnoreRequest.EditAdmin req) {
         try {
+            if (userRepository.existsByUsername(req.getUsername())) {
+                return CommonResponse.fail("Username not available");
+            }
+            if (userRepository.existsByEmail(req.getEmail())) {
+                return CommonResponse.fail("Email not available");
+            }
+            req.setRole(USER_ENUM.USER_TYPE_ADMIN.name());
+            userRepository.save(Consts.toUser(req));
+            Users user = userRepository.findById(req.getUser_id()).orElse(null);
+            return CommonResponse.common("OK", HttpStatus.OK, user);
+        } catch (Exception e) {
+            return CommonResponse.fail(e.getMessage());
+        }
+    }
+
+
+    @PutMapping("/updateDoctor")
+    public ResponseEntity<Object> updateDoctor(@RequestBody IgnoreRequest.EditAdmin req) {
+        try {
+            if (userRepository.existsByUsername(req.getUsername())) {
+                return CommonResponse.fail("Username not available");
+            }
+            if (userRepository.existsByEmail(req.getEmail())) {
+                return CommonResponse.fail("Email not available");
+            }
+            req.setRole(USER_ENUM.USER_TYPE_DOCTOR.name());
             userRepository.save(Consts.toUser(req));
             Users user = userRepository.findById(req.getUser_id()).orElse(null);
             return CommonResponse.common("OK", HttpStatus.OK, user);
