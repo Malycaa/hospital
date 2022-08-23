@@ -18,6 +18,7 @@ import com.example.miniprojecthospitalkelompok2.repository.UserRepository;
 import com.example.miniprojecthospitalkelompok2.service.PatientService;
 import com.example.miniprojecthospitalkelompok2.utils.Consts;
 
+@CrossOrigin(origins = "https://hospitalcenter-id.herokuapp.com")
 @RestController
 @RequestMapping("/api/patient")
 public class PatientController {

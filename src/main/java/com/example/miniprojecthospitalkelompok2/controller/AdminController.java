@@ -17,6 +17,7 @@ import com.example.miniprojecthospitalkelompok2.service.AdminService;
 import com.example.miniprojecthospitalkelompok2.utils.AdminConvert;
 import com.example.miniprojecthospitalkelompok2.utils.Consts;
 
+@CrossOrigin(origins = "https://hospitalcenter-id.herokuapp.com")
 @RestController
 @RequestMapping("/api/account")
 public class AdminController {

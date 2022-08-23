@@ -16,7 +16,7 @@ import com.example.miniprojecthospitalkelompok2.utils.Consts;
 import java.util.List;
 import javax.validation.Valid;
 
-
+@CrossOrigin(origins = "https://hospitalcenter-id.herokuapp.com")
 @RestController
 @RequestMapping("/api/medication")
 public class MedicationController {
